@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_academic_year_all,academic.year.all,model_academic_year,base.group_user,1,1,1,1
+access_academic_semester_all,academic.year.all,model_academic_semester,base.group_user,1,1,1,1
+access_academic_term_all,academic.term.all,model_academic_term,base.group_user,1,1,1,1
+access_academic_class_all,academic.class.all,model_academic_class,base.group_user,1,1,1,1
+access_academic_meeting_all,academic.meeting.all,model_academic_meeting,base.group_user,1,1,1,1
+access_academic_grade_all,academic.grade.all,model_academic_grade,base.group_user,1,1,1,1
+access_academic_subject_all,academic.subject.all,model_academic_subject,base.group_user,1,1,1,1
+access_academic_gradesubject_all,academic.gradesubject.all,model_academic_gradesubject,base.group_user,1,1,1,1
+access_academic_termsemester_all,academic.termsemester.all,model_academic_termsemester,base.group_user,1,1,1,1
