@@ -8,6 +8,7 @@
     'version': '1.0',
     'description': """""",
     'depends': [
+		'hr_holidays'
     ],
     'data': [
         'views/hr_leave_views.xml',
