@@ -8,8 +8,10 @@
     'version': '1.0',
     'description': """""",
     'depends': [
+        'web',
     ],
     'data': [
+        'views/webclient_templates_custom.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [

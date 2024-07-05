@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_login_layout" inherit_id="web.login_layout" name="Custom Login Layout">
+        <xpath expr="//div[@class=&quot;container py-5&quot;]" position="inside">
+            <style>
+                .floating-box {
+                    border-radius: 20px !important;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+        </xpath>
+        <xpath expr="//div[@class=&quot;container py-5&quot;]/div/div" position="attributes">
+             <attribute name="class" add="floating-box" separator=" "/>
+        </xpath>
+    </template>
+</odoo>
