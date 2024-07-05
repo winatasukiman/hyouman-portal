@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- <template id="rt_login_page" inherit_id="web.login" name="Login Inherit">
+        <div class="form-group field-password" position="replace">
+            <div class="form-group field-password">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" name="password" id="password" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                <span class="fa fa-eye-slash" id="rt_toggle_password"></span>                
+            </div>
+        </div>
+    </template>     -->
+
+    <template id="rt_login_page" inherit_id="web.login" name="Login Inherit">
+        <xpath expr='//form/div[3]' position="replace">
+            <div class="form-group field-password">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" name="password" id="password" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autocomplete="current-password" t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                <span class="fa fa-eye-slash" id="rt_toggle_password"></span>                
+            </div>
+        </xpath>
+    </template>    
+
+</odoo>
