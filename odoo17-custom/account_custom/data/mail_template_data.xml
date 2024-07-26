@@ -26,7 +26,8 @@
                             <br/><br/>
                             We have received your payment for the course enrollment at Hyouman Academy, please find the receipt below.
                             <br/><br/>
-                            We are excited to have your child join our academy and look forward to providing an enriching educational experience. If you have any further questions or need additional information, please feel free to contact us at 082299993665.
+                            We are excited to have your child join our academy and look forward to providing an enriching educational experience.
+                            If you have any further questions or need additional information, please feel free to contact us at 082299993665.
                             <br/><br/>
                             Thank you once again for choosing Hyouman Academy.
                             <br/><br/>
@@ -46,7 +47,7 @@
                             </t>
                             amounting in <span style="font-weight:bold;" t-out="format_amount(object.amount_total, object.currency_id) or ''">IDR 143,750.00</span>
                             <br /><br />
-                            Please remit payment at your earliest convenience and do not hesitate to contact us if you have any questions.
+                            Kindly make the payment at your earliest convenience and send us proof of payment by replying to this email once the transfer is complete.
                             If you have any questions or need further assistance, feel free to reach out to us at 082299993665.
                             <br /><br />
                             Thank you
