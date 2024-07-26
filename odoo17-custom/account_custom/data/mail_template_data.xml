@@ -45,9 +45,9 @@
                             <t t-else="">
                                 invoice
                             </t>
-                            amounting in <span style="font-weight:bold;" t-out="format_amount(object.amount_total, object.currency_id) or ''">IDR 143,750.00</span>
-                            <br /><br />
+                            amounting in <span style="font-weight:bold;" t-out="format_amount(object.amount_total, object.currency_id) or ''">IDR 143,750.00</span>.
                             Kindly make the payment at your earliest convenience and send us proof of payment by replying to this email once the transfer is complete.
+                            <br /><br />
                             If you have any questions or need further assistance, feel free to reach out to us at 082299993665.
                             <br /><br />
                             Thank you
