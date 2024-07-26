@@ -14,3 +14,14 @@ class AccountMove(models.Model):
             if all(move.move_type == 'out_refund' for move in self)
             else 'account_custom.hyouman_email_template_edi_invoice'
         )
+
+    # Override function
+    # Add text "PAID" in the report name if the invoice has been paid
+    def _get_invoice_report_filename(self, extension='pdf'):
+        """ Get the filename of the generated invoice report with extension file. """
+        self.ensure_one()
+        result = f"{self.name.replace('/', '_')}.{extension}"
+        if self.payment_state in ('paid', 'in_payment'):
+            result = f"{self.name.replace('/', '_')} (PAID).{extension}"
+
+        return result
