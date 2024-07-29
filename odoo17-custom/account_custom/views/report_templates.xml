@@ -11,7 +11,7 @@
                 </strong>
                 <!-- Show paid stamp in invoice pdf if the invoice is already paid -->
                 <t t-if="print_with_payments">
-                    <t t-if="o.payment_state != 'invoicing_legacy'">
+                    <t t-if="o.payment_state != 'invoicing_legacy' and o.payment_state in ('paid', 'in_payment')">
                         <div style="float: right; margin-right: 2em;">
                             <img src="account_custom/static/src/img/paid-stamp.png" style="max-height: 12em;"/>
                         </div>
