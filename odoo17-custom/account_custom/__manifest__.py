@@ -12,6 +12,7 @@
     ],
     'data': [
         'data/mail_template_data.xml',
+        'views/account_move_views.xml',
         'views/report_templates.xml',
     ],
     'assets': {

@@ -25,3 +25,6 @@ class AccountMove(models.Model):
             result = f"{self.name.replace('/', '_')} (PAID).{extension}"
 
         return result
+
+    # Add a field that will be displayed in both unpaid/paid invoice email content
+    partner_child = fields.Char('Child')

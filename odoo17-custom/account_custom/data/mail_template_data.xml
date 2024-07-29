@@ -26,7 +26,10 @@
                             <br/><br/>
                             We have received your payment for the course enrollment at Hyouman Academy, please find the receipt below.
                             <br/><br/>
-                            We are excited to have your child join our academy and look forward to providing an enriching educational experience.
+                            We are excited to have
+                            <span t-if="object.partner_child" t-out="object.partner_child" style="font-weight:bold;">Lionel Messi</span>
+                            <span t-else="object.partner_child">your child</span>
+                            join our academy and look forward to providing an enriching educational experience.
                             If you have any further questions or need additional information, please feel free to contact us at 082299993665.
                             <br/><br/>
                             Thank you once again for choosing Hyouman Academy.
@@ -36,7 +39,10 @@
 
                         <t t-else="">
                             <br/><br/>
-                            Thank you for your interest in enrolling your child in our courses at Hyouman Academy. We are excited to have the opportunity to contribute to your child's educational journey.
+                            Thank you for your interest in enrolling
+                            <span t-if="object.partner_child" t-out="object.partner_child" style="font-weight:bold;">Lionel Messi</span>
+                            <span t-else="object.partner_child">your child</span>
+                            in our courses at Hyouman Academy. We are excited to have the opportunity to contribute to your child's educational journey.
                             <br /><br />
                             Here is your
                             <t t-if="object.name">
