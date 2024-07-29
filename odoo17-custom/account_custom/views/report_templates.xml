@@ -9,6 +9,14 @@
                 <strong>
                     <div class="mb0 h2" style="color: #af8060;" t-if="company.report_header" t-field="company.report_header"/>
                 </strong>
+                <!-- Show paid stamp in invoice pdf if the invoice is already paid -->
+                <t t-if="print_with_payments">
+                    <t t-if="o.payment_state != 'invoicing_legacy'">
+                        <div style="float: right; margin-right: 2em;">
+                            <img src="account_custom/static/src/img/paid-watermark.png" style="max-height: 12em;"/>
+                        </div>
+                    </t>
+                </t>
             </div>
         </xpath>
         <!-- Hide company report header in footer -->
