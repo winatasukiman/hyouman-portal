@@ -13,7 +13,7 @@
                 <t t-if="print_with_payments">
                     <t t-if="o.payment_state != 'invoicing_legacy'">
                         <div style="float: right; margin-right: 2em;">
-                            <img src="account_custom/static/src/img/paid-watermark.png" style="max-height: 12em;"/>
+                            <img src="account_custom/static/src/img/paid-stamp.png" style="max-height: 12em;"/>
                         </div>
                     </t>
                 </t>
