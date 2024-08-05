@@ -4,13 +4,17 @@
         <xpath expr="//div[@class=&quot;container py-5&quot;]" position="inside">
             <style>
                 .floating-box {
-                    border-radius: 20px !important;
+                    border-radius: 8px !important;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 }
             </style>
         </xpath>
         <xpath expr="//div[@class=&quot;container py-5&quot;]/div/div" position="attributes">
-             <attribute name="class" add="floating-box" separator=" "/>
+            <attribute name="class" add="floating-box" separator=" "/>
+        </xpath>
+        <xpath expr="//div[@class=&quot;container py-5&quot;]" position="attributes">
+            <attribute name="class" add="d-flex justify-content-center align-items-center" separator=" "/>
+            <attribute name="style" add="min-height: 100vh;" separator=" "/>
         </xpath>
     </template>
 </odoo>
