@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <!-- Mail template are declared in a NOUPDATE block so users can freely customize/delete them -->
+    <data>
+        <!--Email template -->
+        <record id="hyouman_email_template_edi_invoice" model="mail.template">
+            <field name="name">Hyouman Academy Invoice: Sending</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="email_from">{{ (object.invoice_user_id.email_formatted or object.company_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="subject">Hyouman Academy Invoice (Ref {{ object.name or 'n/a' }})</field>
+            <field name="description">Sent to customers with their invoices in attachment</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear
+                        <t t-if="object.partner_id.parent_id">
+                            <t t-out="object.partner_id.name or ''">Brandon Freeman</t> (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>),
+                        </t>
+                        <t t-else="">
+                            <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,
+                        </t>
+
+                        <t t-if="object.payment_state in ('paid', 'in_payment')">
+                            <br/><br/>
+                            We have received your payment for the course enrollment at Hyouman Academy, please find the receipt below.
+                            <br/><br/>
+                            We are excited to have
+                            <span t-if="object.partner_child" t-out="object.partner_child" style="font-weight:bold;">Lionel Messi</span>
+                            <span t-else="object.partner_child">your child</span>
+                            join our academy and look forward to providing an enriching educational experience.
+                            If you have any further questions or need additional information, please feel free to contact us at 082299993665.
+                            <br/><br/>
+                            Thank you once again for choosing Hyouman Academy.
+                            <br/><br/>
+                            Best regards
+                        </t>
+
+                        <t t-else="">
+                            <br/><br/>
+                            Thank you for your interest in enrolling
+                            <span t-if="object.partner_child" t-out="object.partner_child" style="font-weight:bold;">Lionel Messi</span>
+                            <span t-else="object.partner_child">your child</span>
+                            in our courses at Hyouman Academy. We are excited to have the opportunity to contribute to your child's educational journey.
+                            <br /><br />
+                            Here is your
+                            <t t-if="object.name">
+                                invoice <span style="font-weight:bold;" t-out="object.name or ''">INV/2021/05/0005</span>
+                            </t>
+                            <t t-else="">
+                                invoice
+                            </t>
+                            amounting in <span style="font-weight:bold;" t-out="format_amount(object.amount_total, object.currency_id) or ''">IDR 143,750.00</span>.
+                            Kindly make the payment at your earliest convenience and send us proof of payment by replying to this email once the transfer is complete.
+                            <br /><br />
+                            If you have any questions or need further assistance, feel free to reach out to us at 082299993665.
+                            <br /><br />
+                            Thank you
+                        </t>
+                    </p>
+                </div>
+            </field>
+            <field name="report_template_ids" eval="[(4, ref('account.account_invoices'))]"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

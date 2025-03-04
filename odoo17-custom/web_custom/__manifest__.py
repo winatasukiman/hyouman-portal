@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'Hyouman Portal Time Off',
+    'name': 'Hyouman Web Custom',
     'category': '',
     'sequence': 54,
-    'summary': 'Hyouman Portal Time Off',
+    'summary': 'Hyouman Web Custom',
     'version': '1.0',
     'description': """""",
     'depends': [
-        'hr',
-        'hr_holidays'
+        'web',
     ],
     'data': [
-        'data/mail_template_data.xml',
-        
-        'views/hr_leave_views.xml',
+        'views/webclient_templates_custom.xml',
     ],
     'assets': {
+        'web._assets_primary_variables': [
+            ('prepend', 'web_custom/static/src/scss/primary_variables.scss'),
+        ],
     },
     'installable': True,
     'auto_install': False,

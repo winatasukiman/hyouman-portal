@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_login_layout" inherit_id="web.login_layout" name="Custom Login Layout">
+        <xpath expr="//div[@class=&quot;container py-5&quot;]" position="attributes">
+            <attribute name="class">container</attribute>
+        </xpath>
+        <xpath expr="//div[@class=&quot;container&quot;]" position="inside">
+            <style>
+                <!--.floating-box {
+                    border-radius: 8px !important;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                }-->
+            </style>
+        </xpath>
+        <xpath expr="//div[@class=&quot;container&quot;]/div/div" position="attributes">
+            <!--<attribute name="class" add="floating-box" separator=" "/>-->
+            <attribute name="class"></attribute>
+        </xpath>
+        <xpath expr="//div[@class=&quot;container&quot;]/div" position="attributes">
+            <attribute name="style">width: 350px;</attribute>
+        </xpath>
+        <xpath expr="//div[@class=&quot;container&quot;]" position="attributes">
+            <attribute name="class" add="d-flex justify-content-center align-items-center px-4" separator=" "/>
+            <attribute name="style" add="min-height: 100vh;" separator=" "/>
+        </xpath>
+    </template>
+</odoo>

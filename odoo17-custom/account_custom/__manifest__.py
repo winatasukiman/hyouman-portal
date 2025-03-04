@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'Hyouman Portal Time Off',
+    'name': 'Hyouman Invoicing Custom',
     'category': '',
     'sequence': 54,
-    'summary': 'Hyouman Portal Time Off',
+    'summary': 'Hyouman Invoicing Custom',
     'version': '1.0',
     'description': """""",
     'depends': [
-        'hr',
-        'hr_holidays'
+        'account',
     ],
     'data': [
         'data/mail_template_data.xml',
-        
-        'views/hr_leave_views.xml',
+        'views/account_move_views.xml',
+        'views/report_templates.xml',
     ],
     'assets': {
     },

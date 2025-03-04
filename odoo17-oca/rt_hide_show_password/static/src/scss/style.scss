@@ -1,0 +1,11 @@
+.oe_login_form{
+    .field-password{
+        position: relative;
+    }
+    #rt_toggle_password{
+        position: absolute;
+        right: 13px;
+        bottom: 10px;
+        cursor: pointer;
+    }
+}

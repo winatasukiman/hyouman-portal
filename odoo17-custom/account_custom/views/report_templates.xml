@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit default external layout bold -->
+    <template id="hyouman_external_layout_bold" inherit_id="web.external_layout_bold">
+        <!-- Show company report header -->
+        <xpath expr="//div[@name='company_address']" position="before">
+            <div class="col-5 offset-1" style=" margin-top: 1.5rem;">
+                <strong>
+                    <div class="mb0 h2" style="color: #af8060;" t-if="company.report_header" t-field="company.report_header"/>
+                </strong>
+                <!-- Show paid stamp in invoice pdf if the invoice is already paid -->
+                <t t-if="print_with_payments">
+                    <t t-if="o.payment_state != 'invoicing_legacy' and o.payment_state in ('paid', 'in_payment')">
+                        <div style="float: right; margin-right: 2em;">
+                            <img src="account_custom/static/src/img/paid-stamp.png" style="max-height: 12em;"/>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </xpath>
+        <!-- Hide company report header in footer -->
+        <xpath expr="//div[@t-attf-class='footer o_clean_footer o_company_#{company.id}_layout']/div/div/div[@t-field='company.report_header']" position="attributes">
+            <attribute name="style">display: none !important;</attribute>
+        </xpath>
+        <!-- Hide company details placehorder -->
+        <xpath expr="//div[@t-attf-class='footer o_clean_footer o_company_#{company.id}_layout']/div/div/span[@t-field='company.partner_id']" position="attributes">
+            <attribute name="style">display: none !important;</attribute>
+        </xpath>
+        <!-- Hide page number -->
+            <xpath expr="//div[@t-attf-class='footer o_clean_footer o_company_#{company.id}_layout']/div/div/ul[@t-if=&quot;report_type == 'pdf'&quot;]" position="attributes">
+            <attribute name="style">display: none !important;</attribute>
+        </xpath>
+    </template>
+
+    <template id="hyouman_address_layout" inherit_id="web.address_layout">
+        <!-- Add text before customer address -->
+        <xpath expr="//t[@t-esc='address or None']" position="before">
+            <span>
+                To:
+            </span>
+        </xpath>
+    </template>
+
+</odoo>
