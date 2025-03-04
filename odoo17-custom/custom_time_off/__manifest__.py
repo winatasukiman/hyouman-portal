@@ -8,9 +8,12 @@
     'version': '1.0',
     'description': """""",
     'depends': [
-		'hr_holidays'
+        'hr',
+        'hr_holidays'
     ],
     'data': [
+        'data/mail_template_data.xml',
+        
         'views/hr_leave_views.xml',
     ],
     'assets': {
