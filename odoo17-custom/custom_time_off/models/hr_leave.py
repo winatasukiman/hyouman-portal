@@ -9,9 +9,10 @@ class HolidaysRequestCustom(models.Model):
     
     def _validate_leave_request(self):
         """ Override function """
-        
         res = super()._validate_leave_request()
-        self.notify_all_employee()
+        
+        if self:
+            self.notify_all_employee()
         
         return res
     
@@ -29,5 +30,5 @@ class HolidaysRequestCustom(models.Model):
             return
         
         # Send the email using the leave request record (self)
-        for employee in employees:
-            template.sudo().send_mail(self.id, email_values={'email_to': employee.work_email}, force_send=True)
+        email_to_list = [employee.work_email for employee in employees]
+        template.sudo().send_mail(self.id, email_values={'email_to': ','.join(email_to_list)}, force_send=True)
