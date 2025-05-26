@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project.act_project_project_2_project_task_all" model="ir.actions.act_window">
+            <field name="context">{'active_model': 'project.project', 'default_project_id': active_id, 'show_project_update': True, 'search_default_open_tasks': 0,}</field>
+            <field name="domain">[('project_id', '=', active_id), ('display_in_project', '=', True), ('parent_id', '=', False)]</field>
+        </record>
+
+        <record id="view_project_kanban" model="ir.ui.view">
+            <field name="name">project.project.kanban</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//div[hasclass('o_project_kanban_boxes')]/.." position="after"> -->
+                <xpath expr="//field[@name='activity_ids']" position="after">
+                    <div class="d-flex ms-auto align-items-center">
+                        <a class="btn btn-primary" type="open">View Project</a>
+                    </div>
+                </xpath>
+                <!-- <xpath expr="//field[@name='display_name']/.." position="after">
+                    <span class="text-truncate d-block" t-att-title="record.code.value">
+                    Code: <field name="code"/>
+                    </span>
+                </xpath> -->
+            </field>
+        </record>
+    </data>
+</odoo>
