@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Victor Imannuel
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<template>
+    <t
+        t-name="ft_show_view_type_display_name.ControlPanel"
+        t-inherit="web.ControlPanel"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//nav[hasclass('o_cp_switch_buttons')]/t/button/i" position="after">
+            <span t-esc="view.name" style="margin-left: 5px; font-size: 14px;"/>
+        </xpath>
+    </t>
+</template>
