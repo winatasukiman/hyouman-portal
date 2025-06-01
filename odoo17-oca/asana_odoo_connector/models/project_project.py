@@ -70,8 +70,11 @@ class ProjectProject(models.Model):
             project_instance = asana.ProjectsApi(api_client)
             
             try:
+                opts = {
+                    'opt_fields': "name,html_notes,custom_field_settings",
+                }
                 # Import project information
-                project_response = project_instance.get_project(record.asana_gid, {})
+                project_response = project_instance.get_project(record.asana_gid, opts)
                 record.write({
                     'name': project_response['name'],
                     'description': project_response['html_notes'],
