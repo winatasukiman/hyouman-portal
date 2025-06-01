@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Victor Imannuel
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<template>
+    <t
+        t-name="modern_backend_theme.ControlPanel"
+        t-inherit="web.ControlPanel"
+        t-inherit-mode="extension"
+    >
+        <!-- <xpath expr="//div[@class='btn-group d-xl-none o_control_panel_collapsed_create']" position="before"> -->
+        <!-- <xpath expr="//div[@class='d-none d-xl-inline-flex gap-1']" position="after"> -->
+        <xpath expr="//t[@t-slot='control-panel-create-button']/.." position="before">
+            <!-- Add back button -->
+            <a href="javascript:history.back()" class="btn btn-primary">
+                <i class="fa fa-arrow-left"></i> Back
+                <!-- <i class="fa fa-chevron-left"></i> Back -->
+            </a>
+        </xpath>
+    </t>
+</template>
