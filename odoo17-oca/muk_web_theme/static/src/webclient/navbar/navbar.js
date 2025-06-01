@@ -10,7 +10,18 @@ patch(NavBar.prototype, {
 	setup() {
         super.setup();
         this.appMenuService = useService('app_menu');
+        this.sidebarHidden = false;
     },
+    onToggleSidebar() {
+        const sidebar = document.querySelector('.mk_apps_sidebar_panel');
+        const sidebarLogo = document.querySelector('.mk_apps_sidebar_logo');
+        if (sidebar) {
+            this.sidebarHidden = !this.sidebarHidden;
+            sidebar.classList.toggle('hide-animate', this.sidebarHidden);
+            sidebarLogo.classList.toggle('hide-animate', this.sidebarHidden);
+            this.render();  // Re-render to update the icon
+        }
+    }
 });
 
 patch(NavBar, {

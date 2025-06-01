@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 Victor Imannuel
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<template>
+    <t
+        t-name="modern_backend_theme.SearchPanel.Category"
+        t-inherit="web.SearchPanel.Category"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//button[hasclass('o_toggle_fold')]/.." position="attributes">
+            <attribute name="style">
+                margin: 4px 0 !important;
+            </attribute>
+        </xpath>
+        <xpath expr="//button[hasclass('o_toggle_fold')]/../.." position="attributes">
+            <attribute name="style">
+                border-radius: 8px;
+            </attribute>
+        </xpath>
+    </t>
+</template>

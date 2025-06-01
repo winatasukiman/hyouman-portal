@@ -46,6 +46,15 @@
 				</DropdownItem>
 			</AppsMenu>
 		</xpath>
+
+		<!-- Sidebar toggle -->
+		<xpath expr="//DropdownItem[@t-esc='currentApp.name']" position="before">
+			<div class="o-dropdown dropdown o_navbar_apps_menu o-dropdown--no-caret me-2">
+				<button type="button" class="dropdown-toggle" title="Toggle Sidebar" tabindex="0" t-on-click="onToggleSidebar">
+					<i t-attf-class="fa #{this.sidebarHidden ? 'fa-chevron-right' : 'fa-chevron-left'}"></i>
+				</button>
+			</div>
+		</xpath>
 	</t>
 	
 </templates>
