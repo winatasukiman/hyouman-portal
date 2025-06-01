@@ -20,7 +20,7 @@
 #
 ###############################################################################
 from datetime import datetime
-from odoo import fields, models
+from odoo import fields, models, _
 from odoo.exceptions import ValidationError
 
 import logging
@@ -93,6 +93,8 @@ class ProjectTask(models.Model):
                     })
             except Exception as exc:
                 raise ValidationError(exc)
+            else:
+                return record.project_id.action_notify(True, 'Task', record.name)
             
     def open_wizard_create_fields(self):
         """
