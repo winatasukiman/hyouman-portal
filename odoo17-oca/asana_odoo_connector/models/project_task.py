@@ -40,18 +40,19 @@ class ProjectTask(models.Model):
     asana_gid = fields.Char(string='Asana GID',
                             help='Asana ID for the project record',
                             readonly=True)
-    
+
     def action_import_stories(self):
         """
-        Method button_import_stories to import the stories from asana to odoo
+        Method action_import_stories to import the stories from asana to odoo
         """
+        configuration = asana.Configuration()
+        configuration.access_token = self.env[
+            'ir.config_parameter'].sudo().get_param(
+            'asana_odoo_connector.app_token')
+        api_client = asana.ApiClient(configuration)
+        story_instance = asana.StoriesApi(api_client)
+        
         for record in self:
-            configuration = asana.Configuration()
-            configuration.access_token = self.env[
-                'ir.config_parameter'].sudo().get_param(
-                'asana_odoo_connector.app_token')
-            api_client = asana.ApiClient(configuration)
-            story_instance = asana.StoriesApi(api_client)
             
             for message in record.message_ids.filtered(lambda m: 
                 m.message_type == 'comment' and
@@ -93,8 +94,17 @@ class ProjectTask(models.Model):
                     })
             except Exception as exc:
                 raise ValidationError(exc)
-            else:
-                return record.project_id.action_notify(True, 'Task', record.name)
+            # else:
+            #     return record.project_id.action_notify(True, 'Task', record.name)
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Import Completed',
+                'message': f'Stories imported for {len(self)} task(s).',
+                'sticky': False,
+            }
+        }
             
     def open_wizard_create_fields(self):
         """
