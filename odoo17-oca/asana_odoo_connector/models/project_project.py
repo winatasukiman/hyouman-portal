@@ -189,7 +189,7 @@ class ProjectProject(models.Model):
                 
                  # Populate the subtask
                 subtask_response = api_instance.get_subtasks_for_task(task['gid'], opts)
-                subtask_created_list = []
+                subtask_record_list = []
                 for subtask in subtask_response:
                     subtask_assignee = False
                     if subtask['assignee']:
@@ -214,13 +214,14 @@ class ProjectProject(models.Model):
                     ])
                     if not subtask_record:
                         subtask_record = self.env['project.task'].create(subtask_data)
-                        subtask_created_list.append(subtask_record.id)
+                        subtask_record_list.append(subtask_record.id)
                     else:
                         subtask_record.write(subtask_data)
+                        subtask_record_list.append(subtask_record.id)
                         
                 # Connect the subtask to the parent task using child_ids
                 task_record.write({
-                    'child_ids': [(6, 0, subtask_created_list)] if len(subtask_created_list) > 0 else False,
+                    'child_ids': [(6, 0, subtask_record_list)] if len(subtask_record_list) > 0 else False,
                 })
                 
                 # Commented because taking too long
