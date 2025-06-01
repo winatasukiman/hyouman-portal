@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Project/Task Dashboard -->
+        <menuitem
+            id="menu_project_task_dashboard"
+            name="Task Dashboard"
+            action="action_view_task_dashboard"
+            parent="project.menu_main_pm"
+            sequence="1"/>
+        
+        <!-- Override sequence -->
+        <record id="project.menu_projects_group_stage" model="ir.ui.menu">
+            <field name="sequence">2</field>
+        </record>
+        
+    </data>
+</odoo>

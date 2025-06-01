@@ -51,6 +51,24 @@ def action_notify(success):
     }
     return notification
 
+def action_notify_import(success):
+    """
+    Method action_notify used to notify whether the connection to the asana is
+    successful or not.
+    """
+    notification = {
+        'type': 'ir.actions.client',
+        'tag': 'display_notification',
+        'params': {
+            'title': _('Import successful!') if success is True else _(
+                'Import not successful!'),
+            'message': 'Import projects from Asana is successful.' if success is True else 'Import projects from Asana is not successful.',
+            'sticky': True,
+            'type': 'success' if success is True else 'danger'
+        }
+    }
+    return notification
+
 
 def action_import_project_stages(project_gid, api_client):
     """
@@ -179,7 +197,9 @@ class ResConfigSettings(models.TransientModel):
                 self.env['project.project'].write(project)
         except Exception as exc:
             raise ValidationError(exc)
-
+        else:
+            return action_notify_import(True)
+            
     
     def button_import_tasks(self):
         """

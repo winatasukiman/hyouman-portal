@@ -1,0 +1,12 @@
+may 15, 2025:
+- install hyouman_project
+- install ft_show_view_type_display_name
+- install asana_odoo_connector
+
+may 27, 2025:
+- install modern_backend_theme
+- install project_timeline
+- install project_team
+
+may 28, 2025:
+- upgrade web_custom
