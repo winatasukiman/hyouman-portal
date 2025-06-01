@@ -1,7 +1,9 @@
 // Kanban
 .oe_kanban_global_click {
+    --KanbanRecord-padding-h: 16px;
+    --KanbanRecord-padding-v: 12px;
     border-radius: 10px;
-    margin: 3px 0px;
+    margin: 4px 0px;
 }
 .o_kanban_renderer .o_kanban_record > div:not(.o_dropdown_kanban) {
     &:hover {
