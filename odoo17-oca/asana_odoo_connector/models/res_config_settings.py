@@ -178,7 +178,7 @@ class ResConfigSettings(models.TransientModel):
                         'name': project['name'],
                         'asana_gid': asana_gid,
                         'type_ids': type_ids,
-                        'description': project_data['notes'],
+                        'description': project_data['html_notes'],
                         'user_id': False,
                         # 'task_properties_definition': custom_fields
                     })
@@ -186,7 +186,7 @@ class ResConfigSettings(models.TransientModel):
                     project_write_list.append({
                         'name': project['name'],
                         'type_ids': type_ids,
-                        'description': project_data['notes'],
+                        'description': project_data['html_notes'],
                         # 'task_properties_definition': custom_fields
                     })
                     

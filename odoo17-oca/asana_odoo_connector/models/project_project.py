@@ -74,7 +74,7 @@ class ProjectProject(models.Model):
                 project_response = project_instance.get_project(record.asana_gid, {})
                 record.write({
                     'name': project_response['name'],
-                    'description': project_response['notes'],
+                    'description': project_response['html_notes'],
                 })
                 
                 # Import custom fields
