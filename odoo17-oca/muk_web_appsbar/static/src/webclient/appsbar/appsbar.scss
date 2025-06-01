@@ -1,10 +1,12 @@
 .mk_apps_sidebar_panel {
     @include mk-disable-scrollbar();
     background-color: $mk-appbar-background;
+	--mk-sidebar-width: #{$mk-sidebar-large-width};
     width: var(--mk-sidebar-width, 0);
+    transition: all 0.3s ease;
     overflow-y: auto;
-	border-top: 2px solid #f4b387;
-	border-right: 2px solid #f4b387;
+	border-top: 2px solid $mk-appbar-active;
+	border-right: 2px solid $mk-appbar-active;
     .mk_apps_sidebar {
         height: 100%;
         display: flex;
@@ -38,28 +40,42 @@
 	        > li.active > a {
 			    // background: $mk-appbar-active;
 				// border: 2px solid #f4b387;
-				box-shadow: inset 0 0 0 2px #f4b387;
+				box-shadow: inset 0 0 0 2px $mk-appbar-active;
 	        }
 	        > li:hover > a {
-			    background: $mk-appbar-active;
+				background: darken($mk-appbar-background, 5%);
 				transition: all 0.3s;
 				// border: 2px solid #f4b387;
-				box-shadow: inset 0 0 0 2px #f4b387;
+				box-shadow: inset 0 0 0 2px $mk-appbar-active;;
 	        }
 	    }
 	}
 }
 
+.mk_apps_sidebar_panel.hide-animate {
+    // opacity: 0;
+    // transform: translateX(-100%);
+    transition: all 0.3s ease;
+    pointer-events: none;
+	--mk-sidebar-width: 0;
+}
+
 .mk_apps_sidebar_logo {
 	position: fixed;
 	width: var(--mk-sidebar-width, 0);
+    transition: all 0.3s ease;
 	text-align: center;
     background-color: $mk-appbar-background;
-	border-right: 2px solid #f4b387;
+	border-right: 2px solid $mk-appbar-active;;
 	img {
 		height: 100px;
 		overflow-y: auto;
+		overflow-x: hidden;
 	}
+}
+.mk_apps_sidebar_logo.hide-animate {
+	opacity: 0;
+    transition: all 0.3s ease;
 }
 
 .mk_sidebar_type_large {
