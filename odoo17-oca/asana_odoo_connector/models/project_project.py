@@ -199,7 +199,7 @@ class ProjectProject(models.Model):
                     subtask_data = {
                         'name': subtask['name'],
                         'parent_id': task_record.id,
-                        # 'project_id': project_id,
+                        'project_id': False,
                         'asana_gid': subtask['gid'],
                         'description': subtask['html_notes'],
                         'date_deadline': subtask['due_on'],
@@ -210,7 +210,6 @@ class ProjectProject(models.Model):
                     
                     subtask_record = self.env['project.task'].search([
                         ('asana_gid', '=', subtask['gid']),
-                        ('project_id', '=', project_id)
                     ])
                     if not subtask_record:
                         subtask_record = self.env['project.task'].create(subtask_data)
