@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
-                <app data-string="Asana" string="Asana" name="asana">
+                <app data-string="Asana" string="Asana" name="asana_odoo_connector">
                     <div class="app_settings_block" data-string="Asana"
                          string="Asana" data-key="asana_odoo_connector">
                         <h2>Asana Settings</h2>
