@@ -71,7 +71,8 @@
             <field name="inherit_id" ref="project.view_task_kanban"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@class='oe_kanban_bottom_left']/field[@name='activity_ids']" position="after">
-                    <div class="d-flex ms-auto align-items-center">
+                    <!-- <div class="d-flex ms-auto align-items-center"> -->
+                    <div class="d-flex align-items-center">
                         <button class="btn btn-primary" type="object" name="button_open_formview_popup">Open Popup</button>
                     </div>
                 </xpath>
