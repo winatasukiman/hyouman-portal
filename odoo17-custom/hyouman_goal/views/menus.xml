@@ -1,0 +1,40 @@
+<odoo>
+    <!-- Goals -->
+    <menuitem
+        id="goal_management_root"
+        name="Goals"
+        web_icon="hyouman_goal,static/description/icon.png"
+        sequence="10"/>
+
+    <!-- Goals/Goals -->
+    <menuitem
+        id="goal_management_goals"
+        name="Goals"
+        parent="goal_management_root"
+        action="goal_goal_action"
+        sequence="10"/>
+
+    <!-- Goals/Configuration -->
+    <menuitem
+        id="goal_management_config"
+        name="Configuration"
+        parent="goal_management_root"
+        sequence="100"
+        groups="hyouman_goal.group_goal_manager"/>
+
+    <!-- Goals/Configuration/Periods -->
+    <menuitem
+        id="goal_management_config_periods"
+        name="Periods"
+        parent="goal_management_config"
+        action="goal_period_action"
+        sequence="10"/>
+
+    <!-- Goals/Configuration/Sections -->
+    <menuitem
+        id="goal_management_config_sections"
+        name="Sections"
+        parent="goal_management_config"
+        action="goal_section_action"
+        sequence="20"/>
+</odoo>
