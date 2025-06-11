@@ -17,6 +17,7 @@
         'base', 
         'mail',
         'project',
+        'hyouman_project',
     ],
     'data': [
         'security/goal_security.xml',

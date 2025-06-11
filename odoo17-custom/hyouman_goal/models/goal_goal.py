@@ -35,6 +35,7 @@ class GoalGoal(models.Model):
         ('manual', 'Manual'),
         ('subgoals', 'From Sub-Goals'),
         ('projects', 'From Related Projects'),
+        ('sections', 'From Related Sections'),
         ('tasks', 'From Related Tasks'),
     ], string='Progress Source', default='tasks', required=True, tracking=True)
 
@@ -44,6 +45,7 @@ class GoalGoal(models.Model):
         store=True,
         readonly=False,
         tracking=True,
+        recursive=True
     )
     
     status = fields.Selection([
@@ -74,6 +76,10 @@ class GoalGoal(models.Model):
         'project.task', 
         string='Related Tasks'
     )
+    related_section_ids = fields.Many2many(
+        'project.task.type', 
+        string='Related Sections'
+    )
     
     @api.constrains('parent_goal_ids')
     def _check_goal_hierarchy(self):
@@ -82,6 +88,7 @@ class GoalGoal(models.Model):
 
     @api.depends('sub_goal_ids', 'sub_goal_ids.completion_percentage', 
                  'related_project_ids', 'related_project_ids.tasks.state',
+                 'related_section_ids',
                  'related_task_ids', 'related_task_ids.state')
     def _compute_completion_percentage(self):
         for goal in self:
@@ -108,11 +115,24 @@ class GoalGoal(models.Model):
                 all_task_total = len(all_tasks)
                 total = all_task_total
                 count = completed_task_total * 100
-                
+                  
             elif goal.progress_source == 'tasks' and goal.related_task_ids:
                 done_tasks = goal.related_task_ids.filtered(lambda t: t.state in ['1_done'])
                 count = len(done_tasks) * 100
                 total = len(goal.related_task_ids)
+                
+            elif goal.progress_source == 'sections' and goal.related_task_ids:
+                all_done_tasks = all_total_tasks = 0
+                
+                sections = goal.related_section_ids
+                for section in sections:
+                    tasks_in_section = self.env['project.task'].search([('stage_id', '=', section._origin.id)])
+                    done_tasks = tasks_in_section.filtered(lambda t: t.state in ['1_done'])
+                    all_done_tasks += len(done_tasks)
+                    all_total_tasks += len(tasks_in_section)
+                
+                count = all_done_tasks * 100
+                total = all_total_tasks
 
             if total > 0:
                 goal.completion_percentage = count / total
