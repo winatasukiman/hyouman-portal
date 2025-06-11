@@ -18,6 +18,7 @@
         # Views
         'views/project_views.xml',
         'views/project_task_views.xml',
+        'views/project_task_type_views.xml',
         'views/menu_views.xml',
     ],
 }
