@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="task_type_tree" model="ir.ui.view">
+            <field name="name">project.task.type.tree</field>
+            <field name="model">project.task.type</field>
+            <field name="inherit_id" ref="project.task_type_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="project_ids" widget="many2many_tags"/>
+                    <field name="done_task_count" string="Completed Tasks"/>
+                    <field name="task_count" string="All Tasks"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
