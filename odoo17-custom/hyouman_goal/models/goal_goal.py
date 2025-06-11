@@ -121,7 +121,7 @@ class GoalGoal(models.Model):
                 count = len(done_tasks) * 100
                 total = len(goal.related_task_ids)
                 
-            elif goal.progress_source == 'sections' and goal.related_task_ids:
+            elif goal.progress_source == 'sections' and goal.related_section_ids:
                 all_done_tasks = all_total_tasks = 0
                 
                 sections = goal.related_section_ids
