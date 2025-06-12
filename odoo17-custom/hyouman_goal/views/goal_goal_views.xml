@@ -6,7 +6,6 @@
         <field name="arch" type="xml">
             <form string="Goal">
                 <header>
-                    <!-- <field name="status" widget="statusbar" statusbar_visible="on_track,at_risk,achieved,dropped" options="{'clickable': '1'}"/> -->
                     <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
@@ -18,23 +17,19 @@
                         <group>
                             <label for="completion_percentage" string="Completion"/>
                             <div name="completion_percentage" class="o_row">
+                                <field name="is_progress_source_manual" invisible="1"/>
                                 <field name="completion_percentage" class="oe_inline" widget="progressbar"/>
-                                <field name="completion_percentage" invisible="progress_source != 'manual'"/>
+                                <field name="completion_percentage" invisible="not is_progress_source_manual"/>
                             </div>
                             <field name="goal_owner_id" widget="many2one_avatar_user"/>
                             <field name="accountable_team"/>
-                            <!-- <field name="section_id" placeholder="e.g., Company, Marketing..."/> -->
                         </group>
                         <group>
-                            <field name="period_id"/>
+                            <field name="date_from" widget="daterange" options="{'end_date_field': 'date_to'}"/>
+                            <field name="date_to" invisible="1"/>
                             <field name="due_date"/>
                         </group>
                     </group>
-
-                    <!-- <group string="Progress"> -->
-                        <!-- <field name="completion_percentage" widget="progressbar" readonly="[('progress_source', '!=', 'manual')]" title="Hehe"/> -->
-                        <!-- <field name="completion_percentage" widget="percentpie" readonly="[('progress_source', '!=', 'manual')]"/> -->
-                    <!-- </group> -->
 
                     <notebook>
                         <page string="Description">
@@ -61,130 +56,47 @@
                             </group>
                         </page>
                         <page string="Related Works">
-                            <!-- If progress source set to sections -->
-                            <div invisible="progress_source != 'sections'">
-                                <group>
-                                    <!-- Sections -->
-                                    <group name="related_sections" string="Related Sections" colspan="2">
-                                        <field name="related_section_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Section Name"/>
-                                                <field name="project_ids" string="Project" widget="many2many_tags"/>
-                                                <field name="done_task_count" string="Completed Tasks"/>
-                                                <field name="task_count" string="All Tasks"/>
-                                            </tree>
-                                        </field>
-                                    </group>
+                            <group>
+                                <!-- Projects -->
+                                <group name="related_projects" string="Related Projects" colspan="2">
+                                    <field name="related_project_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom" create="false" edit="false" delete="true">
+                                            <field name="name" string="Project Name"/>
+                                            <field name="closed_task_count" string="Completed Tasks"/>
+                                            <field name="task_count" string="All Tasks"/>
+                                        </tree>
+                                    </field>
                                 </group>
-                                <group>
-                                    <!-- Projects -->
-                                    <group name="related_projects" string="Related Projects">
-                                        <field name="related_project_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Project Name"/>
-                                                <field name="closed_task_count" string="Completed Tasks"/>
-                                                <field name="task_count" string="All Tasks"/>
-                                            </tree>
-                                        </field>
-                                    </group>
-                                    <!-- Tasks -->
-                                    <group name="related_tasks" string="Related Tasks">
-                                        <field name="related_task_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Task Name"/>
-                                                <field name="company_id" column_invisible="1"/>
-                                                <field name="project_id" string="Project"/>
-                                                <field name="state" string="Status" widget="badge"
-                                                    decoration-success="state in ['1_done']"/>
-                                            </tree>
-                                        </field>
-                                    </group>
+                            </group>
+                            <group>
+                                <!-- Sections -->
+                                <group name="related_sections" string="Related Sections">
+                                    <field name="related_section_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom" create="false" edit="false" delete="true">
+                                            <field name="name" string="Section Name"/>
+                                            <field name="project_ids" string="Project" widget="many2many_tags"/>
+                                            <field name="done_task_count" string="Completed Tasks"/>
+                                            <field name="task_count" string="All Tasks"/>
+                                        </tree>
+                                    </field>
                                 </group>
-                            </div>
-                            <!-- If progress source set to projects -->
-                            <div invisible="progress_source != 'projects'">
-                                <group>
-                                    <!-- Projects -->
-                                    <group name="related_projects" string="Related Projects" colspan="2">
-                                        <field name="related_project_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Project Name"/>
-                                                <field name="closed_task_count" string="Completed Tasks"/>
-                                                <field name="task_count" string="All Tasks"/>
-                                            </tree>
-                                        </field>
-                                    </group>
+                                <!-- Tasks -->
+                                <group name="related_tasks" string="Related Tasks">
+                                    <field name="related_task_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom" create="false" edit="false" delete="true">
+                                            <field name="name" string="Task Name"/>
+                                            <field name="company_id" column_invisible="1"/>
+                                            <field name="project_id" string="Project" widget="badge"/>
+                                            <field name="state" string="Status" widget="badge"
+                                                decoration-success="state in ['1_done']"/>
+                                        </tree>
+                                    </field>
                                 </group>
-                                <group>
-                                    <!-- Sections -->
-                                    <group name="related_sections" string="Related Sections">
-                                        <field name="related_section_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Section Name"/>
-                                                <field name="project_ids" string="Project"/>
-                                                <field name="done_task_count" string="Completed Tasks"/>
-                                                <field name="task_count" string="All Tasks"/>
-                                            </tree>
-                                        </field>
-                                    </group>
-                                    <!-- Tasks -->
-                                    <group name="related_tasks" string="Related Tasks">
-                                        <field name="related_task_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Task Name"/>
-                                                <field name="company_id" column_invisible="1"/>
-                                                <field name="project_id" string="Project" widget="badge"/>
-                                                <field name="state" string="Status" widget="badge"
-                                                    decoration-success="state in ['1_done']"/>
-                                            </tree>
-                                        </field>
-                                    </group>
-                                </group>
-                            </div>
-                            <!-- If progress source set to tasks -->
-                            <div invisible="progress_source not in ['tasks', 'manual', 'subgoals']">
-                                <group>
-                                    <!-- Tasks -->
-                                    <group name="related_tasks" string="Related Tasks" colspan="2">
-                                        <field name="related_task_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Task Name"/>
-                                                <field name="company_id" column_invisible="1"/>
-                                                <field name="project_id" string="Project"/>
-                                                <field name="state" string="Status" widget="badge"
-                                                    decoration-success="state in ['1_done']"/>
-                                            </tree>
-                                        </field>
-                                    </group>
-                                </group>
-                                <group>
-                                    <!-- Projects -->
-                                    <group name="related_projects" string="Related Projects">
-                                        <field name="related_project_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Project Name"/>
-                                                <field name="closed_task_count" string="Completed Tasks"/>
-                                                <field name="task_count" string="All Tasks"/>
-                                            </tree>
-                                        </field>
-                                    </group>
-                                    <!-- Sections -->
-                                    <group name="related_sections" string="Related Sections">
-                                        <field name="related_section_ids" nolabel="1" colspan="2">
-                                            <tree editable="bottom" create="false" edit="false" delete="true">
-                                                <field name="name" string="Section Name"/>
-                                                <field name="project_ids" string="Project" widget="many2many_tags"/>
-                                                <field name="done_task_count" string="Completed Tasks"/>
-                                                <field name="task_count" string="All Tasks"/>
-                                            </tree>
-                                        </field>
-                                    </group>
-                                </group>
-                            </div>
+                            </group>
                         </page>
                         <page string="Settings">
                             <group>
-                                <field name="progress_source" widget="radio" options="{'horizontal': true}"/>
+                                <field name="progress_source_ids" widget="many2many_checkboxes"/>
                             </group>
                         </page>
                     </notebook>
@@ -205,7 +117,6 @@
         <field name="arch" type="xml">
             <tree string="Goals" class="gx-5">
                 <field name="name"/>
-                <field name="period_id"/>
                 <field name="due_date" optional="hide"/>
                 <field name="completion_percentage" widget="progressbar" string="Progress"/>
                 <field name="goal_owner_id" widget="many2one_avatar_user"/>
@@ -223,7 +134,7 @@
         <field name="name">goal.goal.kanban</field>
         <field name="model">goal.goal</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="section_id" class="o_kanban_dashboard">
+            <kanban class="o_kanban_dashboard">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="goal_owner_id"/>
@@ -293,8 +204,6 @@
                 <group expand="0" string="Group By">
                     <filter string="Owner" name="group_by_owner" context="{'group_by': 'goal_owner_id'}"/>
                     <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
-                    <filter string="Period" name="group_by_period" context="{'group_by': 'period_id'}"/>
-                    <filter string="Section" name="group_by_section" context="{'group_by': 'section_id'}"/>
                 </group>
            </search>
         </field>
@@ -306,7 +215,7 @@
         <field name="res_model">goal.goal</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="search_view_id" ref="goal_goal_view_search"/>
-        <field name="context">{'search_default_my_goals': 1}</field>
+        <field name="context">{}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new goal

@@ -1,0 +1,33 @@
+<odoo>
+    <data noupdate="1">
+        <record id="goal_progress_source_manual" model="goal.progress.source">
+            <field name="name">Manual</field>
+            <field name="code">manual</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="goal_progress_source_subgoal" model="goal.progress.source">
+            <field name="name">Sub-goals</field>
+            <field name="code">subgoals</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="goal_progress_source_project" model="goal.progress.source">
+            <field name="name">Projects</field>
+            <field name="code">projects</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="goal_progress_source_section" model="goal.progress.source">
+            <field name="name">Sections</field>
+            <field name="code">sections</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="goal_progress_source_task" model="goal.progress.source">
+            <field name="name">Tasks</field>
+            <field name="code">tasks</field>
+            <field name="sequence">5</field>
+        </record>
+    </data>
+</odoo>
