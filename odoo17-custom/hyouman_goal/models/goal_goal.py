@@ -65,7 +65,6 @@ class GoalGoal(models.Model):
     date_from = fields.Date(string='Date From', tracking=True)
     date_to = fields.Date(string='Date To', tracking=True)
     due_date = fields.Date(string='Due Date', tracking=True)
-    period_id = fields.Many2one('goal.period')
     
     # Ownership
     goal_owner_id = fields.Many2one('res.users', string='Goal Owner', tracking=True)
