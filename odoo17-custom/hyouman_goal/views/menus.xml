@@ -3,7 +3,7 @@
     <menuitem
         id="goal_management_root"
         name="Goals"
-        web_icon="hyouman_goal,static/description/icon.png"
+        web_icon="hyouman_goal,static/target-arrow.png"
         sequence="10"/>
 
     <!-- Goals/Goals -->
