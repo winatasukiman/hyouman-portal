@@ -20,11 +20,14 @@
         'hyouman_project',
     ],
     'data': [
+        # Security
         'security/goal_security.xml',
         'security/ir.model.access.csv',
-        # 'data/goal_data.xml',
-        'views/goal_period_views.xml',
-        'views/goal_section_views.xml',
+        
+        # Data
+        'data/goal_progress_source_data.xml',
+        
+        # Views
         'views/goal_goal_views.xml',
         'views/menus.xml',
     ],

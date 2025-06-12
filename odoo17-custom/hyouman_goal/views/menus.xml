@@ -22,19 +22,4 @@
         sequence="100"
         groups="hyouman_goal.group_goal_manager"/>
 
-    <!-- Goals/Configuration/Periods -->
-    <menuitem
-        id="goal_management_config_periods"
-        name="Periods"
-        parent="goal_management_config"
-        action="goal_period_action"
-        sequence="10"/>
-
-    <!-- Goals/Configuration/Sections -->
-    <menuitem
-        id="goal_management_config_sections"
-        name="Sections"
-        parent="goal_management_config"
-        action="goal_section_action"
-        sequence="20"/>
 </odoo>
