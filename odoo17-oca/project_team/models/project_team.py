@@ -17,3 +17,18 @@ class ProjectProject(models.Model):
     @api.onchange('team_id')
     def _get_team_members(self):
         self.update({"members_ids": [(6, 0, self.team_id.team_members_ids.ids)]})
+    
+    def write(self, vals):
+        res = False
+        if 'team_id' and 'members_ids' in vals:
+            # Current members to unsubscribe
+            self.message_unsubscribe(partner_ids=self.members_ids.partner_id.ids)
+            
+            # Trigger write on members_ids to update the partner_ids
+            res = super(ProjectProject, self).write(vals)
+            # New members to subscribe
+            self.message_subscribe(partner_ids=self.browse(self.id).members_ids.partner_id.ids)
+        else:
+            res = super(ProjectProject, self).write(vals)
+            
+        return res
