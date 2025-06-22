@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_goal_goal_user_cru,goal.goal user,model_goal_goal,group_goal_user,1,1,1,0
+access_goal_goal_manager_crud,goal.goal manager,model_goal_goal,group_goal_manager,1,1,1,1
+
+access_goal_progress_source_all_crud,goal.progress.source all,model_goal_progress_source,,1,1,1,1

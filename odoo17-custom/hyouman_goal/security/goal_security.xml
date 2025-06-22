@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="module_goal_category" model="ir.module.category">
+            <field name="name">Goal Management</field>
+            <field name="description">User access levels for the Goal Management module.</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="group_goal_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_goal_category"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">Users can view all goals and manage goals they own.</field>
+        </record>
+
+        <record id="group_goal_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_goal_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_goal_user'))]"/>
+            <field name="comment">Managers can manage all goals and configurations.</field>
+        </record>
+    </data>
+</odoo>

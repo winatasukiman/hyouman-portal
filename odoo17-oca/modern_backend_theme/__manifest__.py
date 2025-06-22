@@ -40,6 +40,7 @@
             'modern_backend_theme/static/src/layout/style/layout_style.scss',
             'modern_backend_theme/static/src/xml/control_panel.xml',
             'modern_backend_theme/static/src/xml/search_panel.xml',
+            'modern_backend_theme/static/src/xml/form_status_indicator.xml',
         ],
     },
     'images': [

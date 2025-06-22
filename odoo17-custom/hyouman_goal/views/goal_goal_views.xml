@@ -1,0 +1,288 @@
+<odoo>
+    <!-- FORM VIEW -->
+    <record id="goal_goal_view_form" model="ir.ui.view">
+        <field name="name">goal.goal.form</field>
+        <field name="model">goal.goal</field>
+        <field name="arch" type="xml">
+            <form string="Goal">
+                <header>
+                    <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g., Launch New Program"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="completion_percentage" string="Completion"/>
+                            <div name="completion_percentage" class="o_row">
+                                <field name="is_progress_source_manual" invisible="1"/>
+                                <field name="completion_percentage" class="oe_inline" widget="progressbar"/>
+                            </div>
+                            <field name="goal_owner_id" widget="many2one_avatar_user"/>
+                            <field name="accountable_team"/>
+                        </group>
+                        <group>
+                            <field name="date_from" widget="daterange" options="{'end_date_field': 'date_to'}"/>
+                            <field name="date_to" invisible="1"/>
+                            <field name="due_date"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Describe the goal and its success criteria..."/>
+                        </page>
+                        <page string="Related Goals">
+                            <group>
+                                <group name="parent_goals" string="Parent Goals">
+                                    <field name="parent_goal_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom" create="false" edit="false" delete="true">
+                                            <field name="name" string="Name"/>
+                                            <field name="completion_percentage" widget="progressbar"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <group name="sub_goals" string="Sub Goals">
+                                    <field name="sub_goal_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom" create="true" edit="false" delete="true">
+                                            <field name="name" string="Name"/>
+                                            <field name="completion_percentage" widget="progressbar"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Related Works">
+                            <group col="3">
+                                <group>
+                                    <!-- Projects -->
+                                    <group name="related_projects" string="Related Projects" colspan="2">
+                                        <field name="related_project_ids" nolabel="1" colspan="2">
+                                            <tree editable="bottom" create="false" edit="false" delete="true">
+                                                <field name="name" string="Project Name"/>
+                                                <field name="closed_task_count" string="Completed Tasks"/>
+                                                <field name="task_count" string="All Tasks"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </group>
+                                <!-- Sections -->
+                                <group name="related_sections" string="Related Sections">
+                                    <field name="related_section_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom" create="false" edit="false" delete="true">
+                                            <field name="name" string="Section Name"/>
+                                            <field name="project_ids" string="Project" widget="many2many_tags"/>
+                                            <field name="done_task_count" string="Completed Tasks"/>
+                                            <field name="task_count" string="All Tasks"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                                <!-- Tasks -->
+                                <group name="related_tasks" string="Related Tasks">
+                                    <field name="related_task_ids" nolabel="1" colspan="2">
+                                        <tree editable="bottom" create="false" edit="false" delete="true">
+                                            <field name="name" string="Task Name"/>
+                                            <field name="company_id" column_invisible="1"/>
+                                            <field name="project_id" string="Project" widget="badge"/>
+                                            <field name="state" string="Status" widget="badge"
+                                                decoration-success="state in ['1_done']"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Settings">
+                            <!-- Progress Source -->
+                            <group col="4">
+                                <group colspan="1">
+                                    <field name="progress_source_ids" widget="many2many_checkboxes"/>
+                                </group>
+                                <!-- <group string="Manual Progress Settings" invisible="not is_progress_source_manual" colspan="3" col="1">
+                                    <group col="3">
+                                        <group colspan="1">
+                                            <field name="measurement_unit"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="currency_id" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                        <group colspan="1">
+                                        </group>
+                                    </group>
+                                    <group col="3">
+                                        <group>
+                                            <field name="current_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                            <field name="current_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                            <field name="current_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                        <group>
+                                            <field name="starting_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                            <field name="starting_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                            <field name="starting_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                        <group>
+                                            <field name="target_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                            <field name="target_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                            <field name="target_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                    </group>
+                                </group> -->
+                            </group>
+                            <group string="Manual Progress Settings" invisible="not is_progress_source_manual" col="1">
+                                <group col="3">
+                                    <group colspan="1">
+                                        <field name="measurement_unit"/>
+                                    </group>
+                                    <group colspan="1">
+                                        <field name="currency_id" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                    <group colspan="1">
+                                    </group>
+                                </group>
+                                <!-- Visible based on measurement unit -->
+                                <group col="3">
+                                    <group>
+                                        <field name="current_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                        <field name="current_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                        <field name="current_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                    <group>
+                                        <field name="starting_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                        <field name="starting_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                        <field name="starting_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                    <group>
+                                        <field name="target_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                        <field name="target_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                        <field name="target_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE/LIST VIEW -->
+    <record id="goal_goal_view_tree" model="ir.ui.view">
+        <field name="name">goal.goal.tree</field>
+        <field name="model">goal.goal</field>
+        <field name="arch" type="xml">
+            <tree string="Goals" class="gx-5">
+                <field name="name"/>
+                <field name="due_date" optional="hide"/>
+                <field name="completion_percentage" widget="progressbar" string="Progress"/>
+                <field name="goal_owner_id" widget="many2one_avatar_user"/>
+                <field name="status" widget="badge" 
+                       decoration-success="status == 'on_track' or status == 'achieved'"
+                       decoration-warning="status == 'at_risk' or status == 'partial'"
+                       decoration-danger="status == 'off_track' or status == 'missed'"
+                       decoration-muted="status == 'dropped'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- KANBAN VIEW -->
+    <record id="goal_goal_view_kanban" model="ir.ui.view">
+        <field name="name">goal.goal.kanban</field>
+        <field name="model">goal.goal</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="goal_owner_id"/>
+                <field name="status"/>
+                <field name="completion_percentage"/>
+                <field name="due_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_manage_pane dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_card_content">
+                                <div>
+                                    <field name="status" widget="badge" decoration-success="status == 'on_track' or status == 'achieved'"
+                                           decoration-warning="status == 'at_risk' or status == 'partial'"
+                                           decoration-danger="status == 'off_track' or status == 'missed'"
+                                           decoration-muted="status == 'dropped'"/>
+                                </div>
+                                <div class="mt-2">
+                                    <span>Due: <field name="due_date"/></span>
+                                </div>
+                                <div class="o_kanban_record_bottom mt-2">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="completion_percentage" widget="progressbar"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="goal_owner_id" widget="many2one_avatar_user"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW -->
+    <record id="goal_goal_view_search" model="ir.ui.view">
+        <field name="name">goal.goal.search</field>
+        <field name="model">goal.goal</field>
+        <field name="arch" type="xml">
+            <search string="Search Goals">
+                <field name="name" string="Goal"/>
+                <field name="goal_owner_id"/>
+                <filter string="My Goals" name="my_goals" domain="[('goal_owner_id', '=', uid)]"/>
+                <separator/>
+                <filter string="On Track" name="on_track" domain="[('status', '=', 'on_track')]"/>
+                <filter string="At Risk" name="at_risk" domain="[('status', '=', 'at_risk')]"/>
+                <filter string="Achieved" name="achieved" domain="[('status', '=', 'achieved')]"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Owner" name="group_by_owner" context="{'group_by': 'goal_owner_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="goal_goal_action" model="ir.actions.act_window">
+        <field name="name">Goals</field>
+        <field name="res_model">goal.goal</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="search_view_id" ref="goal_goal_view_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new goal
+            </p><p>
+                Define and track your objectives to drive success.
+            </p>
+        </field>
+    </record>
+</odoo>

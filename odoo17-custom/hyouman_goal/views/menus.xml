@@ -1,0 +1,34 @@
+<odoo>
+    <!-- Goals -->
+    <menuitem
+        id="goal_management_root"
+        name="Goals"
+        web_icon="hyouman_goal,static/target-arrow.png"
+        sequence="10"/>
+    
+
+    <!-- Goals/Goals -->
+    <menuitem
+        id="goal_management_goals"
+        name="Goals"
+        parent="goal_management_root"
+        action="goal_goal_action"
+        sequence="10"/>
+
+    <!-- Goals/Strategy Map -->
+    <menuitem 
+        id="menu_goal_strategy_map"
+        name="Strategy Map"
+        parent="goal_management_root"
+        action="action_goal_strategy_map"
+        sequence="20"/>
+
+    <!-- Goals/Configuration -->
+    <menuitem
+        id="goal_management_config"
+        name="Configuration"
+        parent="goal_management_root"
+        sequence="100"
+        groups="hyouman_goal.group_goal_manager"/>
+
+</odoo>

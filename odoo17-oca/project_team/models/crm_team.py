@@ -14,6 +14,16 @@ class CrmTeamInherit(models.Model):
                                         help="""Project's members are users who
                                      can have an access to the tasks related
                                      to this project.""")
+    
+    def write(self, vals):
+        res = super(CrmTeamInherit, self).write(vals)
+        
+        # If the team is linked to a project, update the team_members_ids in the project
+        related_project = self.env['project.project'].search([('team_id', '=', self.id)])
+        for project in related_project:
+            project.write({'members_ids': [(6, 0, self.team_members_ids.ids)]})
+            
+        return res
 
 class IrModule(models.Model):
     _inherit = "ir.module.module"
