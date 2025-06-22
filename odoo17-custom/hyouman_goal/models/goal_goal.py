@@ -41,6 +41,32 @@ class GoalGoal(models.Model):
         string='Progress Source', tracking=True
     )
     is_progress_source_manual = fields.Boolean()
+    measurement_unit = fields.Selection([
+        ('percentage', '% Percentage'),
+        ('number', '# Number'),
+        ('currency', 'Currency'),
+    ], string='Measurement Unit', default='percentage', required=True, tracking=True)
+    current_value = fields.Float(
+        string='Current Value',
+        help="Current value of the goal, used when progress source is manual.",
+        tracking=True
+    )
+    starting_value = fields.Float(
+        string='Starting Value',
+        help="Starting value of the goal, used when progress source is manual.",
+        tracking=True
+    )
+    target_value = fields.Float(
+        string='Target Value',
+        help="Target value of the goal, used when progress source is manual.",
+        tracking=True
+    )
+    currency_id = fields.Many2one(
+        'res.currency', 
+        string='Currency', 
+        help="Currency used for the goal, if applicable.",
+        tracking=True
+    )
 
     completion_percentage = fields.Float(
         string='Completion',
@@ -102,9 +128,10 @@ class GoalGoal(models.Model):
                 # Do not recompute if source is manual, keep user's value
                 code = source.code
                 if code == 'manual':
-                    continue
+                    count = goal.current_value * 100
+                    total = goal.target_value - goal.starting_value
                 
-                if code == 'subgoals' and goal.sub_goal_ids:
+                elif code == 'subgoals' and goal.sub_goal_ids:
                     count += sum(goal.sub_goal_ids.mapped('completion_percentage'))
                     total += len(goal.sub_goal_ids)
                 
@@ -145,13 +172,16 @@ class GoalGoal(models.Model):
                 goal.completion_percentage = 0.0
     
     
-    @api.onchange('progress_source_ids')
+    @api.onchange('progress_source_ids', 'measurement_unit','current_value', 'starting_value', 'target_value')
     def _onchange_progress_source_ids(self):
         if len(self.progress_source_ids) > 1 and 'manual' in self.progress_source_ids.mapped('code'):
             manual = self.progress_source_ids.filtered(lambda source: source.code == 'manual')
             self.progress_source_ids = manual
             self.is_progress_source_manual = True
         else:
-            self.is_progress_source_manual = False
+            if 'manual' in self.progress_source_ids.mapped('code'):
+                self.is_progress_source_manual = True
+            else:
+                self.is_progress_source_manual = False
             
         self._compute_completion_percentage()

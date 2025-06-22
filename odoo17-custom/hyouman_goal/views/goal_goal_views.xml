@@ -19,7 +19,6 @@
                             <div name="completion_percentage" class="o_row">
                                 <field name="is_progress_source_manual" invisible="1"/>
                                 <field name="completion_percentage" class="oe_inline" widget="progressbar"/>
-                                <field name="completion_percentage" invisible="not is_progress_source_manual"/>
                             </div>
                             <field name="goal_owner_id" widget="many2one_avatar_user"/>
                             <field name="accountable_team"/>
@@ -56,19 +55,19 @@
                             </group>
                         </page>
                         <page string="Related Works">
-                            <group>
-                                <!-- Projects -->
-                                <group name="related_projects" string="Related Projects" colspan="2">
-                                    <field name="related_project_ids" nolabel="1" colspan="2">
-                                        <tree editable="bottom" create="false" edit="false" delete="true">
-                                            <field name="name" string="Project Name"/>
-                                            <field name="closed_task_count" string="Completed Tasks"/>
-                                            <field name="task_count" string="All Tasks"/>
-                                        </tree>
-                                    </field>
+                            <group col="3">
+                                <group>
+                                    <!-- Projects -->
+                                    <group name="related_projects" string="Related Projects" colspan="2">
+                                        <field name="related_project_ids" nolabel="1" colspan="2">
+                                            <tree editable="bottom" create="false" edit="false" delete="true">
+                                                <field name="name" string="Project Name"/>
+                                                <field name="closed_task_count" string="Completed Tasks"/>
+                                                <field name="task_count" string="All Tasks"/>
+                                            </tree>
+                                        </field>
+                                    </group>
                                 </group>
-                            </group>
-                            <group>
                                 <!-- Sections -->
                                 <group name="related_sections" string="Related Sections">
                                     <field name="related_section_ids" nolabel="1" colspan="2">
@@ -95,8 +94,70 @@
                             </group>
                         </page>
                         <page string="Settings">
-                            <group>
-                                <field name="progress_source_ids" widget="many2many_checkboxes"/>
+                            <!-- Progress Source -->
+                            <group col="4">
+                                <group colspan="1">
+                                    <field name="progress_source_ids" widget="many2many_checkboxes"/>
+                                </group>
+                                <!-- <group string="Manual Progress Settings" invisible="not is_progress_source_manual" colspan="3" col="1">
+                                    <group col="3">
+                                        <group colspan="1">
+                                            <field name="measurement_unit"/>
+                                        </group>
+                                        <group colspan="1">
+                                            <field name="currency_id" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                        <group colspan="1">
+                                        </group>
+                                    </group>
+                                    <group col="3">
+                                        <group>
+                                            <field name="current_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                            <field name="current_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                            <field name="current_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                        <group>
+                                            <field name="starting_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                            <field name="starting_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                            <field name="starting_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                        <group>
+                                            <field name="target_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                            <field name="target_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                            <field name="target_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                        </group>
+                                    </group>
+                                </group> -->
+                            </group>
+                            <group string="Manual Progress Settings" invisible="not is_progress_source_manual" col="1">
+                                <group col="3">
+                                    <group colspan="1">
+                                        <field name="measurement_unit"/>
+                                    </group>
+                                    <group colspan="1">
+                                        <field name="currency_id" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                    <group colspan="1">
+                                    </group>
+                                </group>
+                                <!-- Visible based on measurement unit -->
+                                <group col="3">
+                                    <group>
+                                        <field name="current_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                        <field name="current_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                        <field name="current_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                    <group>
+                                        <field name="starting_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                        <field name="starting_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                        <field name="starting_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                    <group>
+                                        <field name="target_value" widget="percentage" invisible="measurement_unit != 'percentage'"/>
+                                        <field name="target_value" widget="integer" invisible="measurement_unit != 'number'"/>
+                                        <field name="target_value" widget="monetary" invisible="measurement_unit != 'currency'"/>
+                                    </group>
+                                </group>
                             </group>
                         </page>
                     </notebook>

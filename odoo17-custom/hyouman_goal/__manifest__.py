@@ -15,6 +15,7 @@
     'category': 'Human Resources/Productivity',
     'depends': [
         'base', 
+        'web', 
         'mail',
         'project',
         'hyouman_project',
@@ -29,8 +30,19 @@
         
         # Views
         'views/goal_goal_views.xml',
+        'views/goal_graph_views.xml',
         'views/menus.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'hyouman_goal/static/src/js/goal_graph.js',
+            # 'https://unpkg.com/vis-network@9.1.2/styles/vis-network.min.css',
+            # 'https://unpkg.com/vis-network@9.1.2/standalone/umd/vis-network.min.js',
+            'https://d3js.org/d3.v7.min.js',
+            'hyouman_goal/static/src/xml/goal_graph_template.xml',
+        ],
+    },
+
     'installable': True,
     'application': True,
     'auto_install': False,
