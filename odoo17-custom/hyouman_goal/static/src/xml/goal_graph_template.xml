@@ -1,0 +1,5 @@
+<templates xml:space="preserve">
+    <t t-name="hyouman_goal.GoalGraph">
+        <div t-ref="mapContainer" style="width:100%; height:100%;"></div>
+    </t>
+</templates>

@@ -1,0 +1,8 @@
+<odoo>
+
+    <record id="action_goal_strategy_map" model="ir.actions.client">
+        <field name="name">Strategy Map</field>
+        <field name="tag">hyouman_goal.tag</field>
+    </record>
+
+</odoo>
