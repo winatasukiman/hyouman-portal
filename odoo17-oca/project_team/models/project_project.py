@@ -20,14 +20,20 @@ class ProjectProject(models.Model):
     
     def write(self, vals):
         res = False
-        if 'team_id' and 'members_ids' in vals:
+        if 'team_id' or 'members_ids' in vals:
             # Current members to unsubscribe
-            self.message_unsubscribe(partner_ids=self.members_ids.partner_id.ids)
+            members_without_current_user = [
+                id for id in self.members_ids.partner_id.ids 
+                if id != self.env.user.partner_id.id
+            ]
+            self.message_unsubscribe(partner_ids=members_without_current_user)
             
             # Trigger write on members_ids to update the partner_ids
             res = super(ProjectProject, self).write(vals)
+            
             # New members to subscribe
             self.message_subscribe(partner_ids=self.browse(self.id).members_ids.partner_id.ids)
+            
         else:
             res = super(ProjectProject, self).write(vals)
             

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_project_power_user_cru,project.project power_user,project.model_project_project,hyouman_project_power_user.group_project_power_user,1,1,1,0
+access_project_task_power_user_cru,project.task power_user,project.model_project_task,hyouman_project_power_user.group_project_power_user,1,1,1,0
+access_project_project_stage_power_user_cru,project.project.stage power_user,project.model_project_project_stage,hyouman_project_power_user.group_project_power_user,1,1,1,0

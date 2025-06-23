@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Override Project/Configuration menu -->
+        <record id="project.menu_project_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('hyouman_project_power_user.group_project_power_user'))]"/>
+        </record>
+    </data>
+</odoo>
