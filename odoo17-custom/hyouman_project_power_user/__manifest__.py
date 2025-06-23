@@ -19,5 +19,8 @@
         # Security
         'security/project_security.xml',
         'security/ir.model.access.csv',
+        
+        # Views
+        'views/menus.xml',
     ],
 }
