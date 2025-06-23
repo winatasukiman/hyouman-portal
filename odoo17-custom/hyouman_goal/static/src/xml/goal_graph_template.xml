@@ -1,5 +1,15 @@
 <templates xml:space="preserve">
     <t t-name="hyouman_goal.GoalGraph">
-        <div t-ref="mapContainer" style="width:100%; height:100%;"></div>
+        <div style="padding: 1rem;">
+            <!-- Dropdown to choose accountable team -->
+            <select t-ref="teamSelect" t-on-change="onTeamChange" style="margin-bottom: 1rem;">
+                <t t-foreach="teams" t-as="team" t-key="team.id">
+                    <option t-att-value="team.name" t-esc="team.name"/>
+                </t>
+            </select>
+
+            <!-- Graph container -->
+            <div t-ref="mapContainer" style="width: 100%; height: 85vh; border: 1px solid #ccc;"></div>
+        </div>
     </t>
 </templates>
