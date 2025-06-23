@@ -26,9 +26,7 @@ class ProjectProject(models.Model):
                 id for id in self.members_ids.partner_id.ids 
                 if id != self.env.user.partner_id.id
             ]
-            # print(len(members_without_current_user), len(self.members_ids.partner_id.ids))
             self.message_unsubscribe(partner_ids=members_without_current_user)
-            self.message_subscribe(partner_ids=[self.env.user.partner_id.id])
             
             # Trigger write on members_ids to update the partner_ids
             res = super(ProjectProject, self).write(vals)
