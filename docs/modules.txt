@@ -1,12 +1,25 @@
+2024:
+- install account_custom
+- install web_custom
+- install custom_time_off
+- install muk_web_theme
+- install rt_hide_show_password
+- install web_chatter_position_cr
+- install web_window_title
+- install web_custom
+
 may 15, 2025:
 - install hyouman_project
 - install ft_show_view_type_display_name
 - install asana_odoo_connector
+- install spd_edit_save_button
 
 may 27, 2025:
 - install modern_backend_theme
 - install project_timeline
 - install project_team
 
-may 28, 2025:
-- upgrade web_custom
+june, 2025:
+- install hyouman_goal
+- install hyouman_project_power_user
+- install hide_menu_user
