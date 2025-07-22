@@ -23,4 +23,11 @@
         # Views
         'views/menus.xml',
     ],
+    
+    'assets': {
+        'web.assets_backend': [
+            'hyouman_project_power_user/static/src/js/project_task_kanban_header.js',
+            'hyouman_project_power_user/static/src/js/project_task_kanban_renderer.js',
+        ],
+    }
 }
